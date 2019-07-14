@@ -14,7 +14,12 @@
     <!-- Navigation -->
     <nav class="nav d-flex mb-1">
         <a class="nav-link disabled mr-auto" href="#" tabindex="-1" aria-disabled="true">Logo</a>
-        <a class="nav-link" href="#">Create Room</a>
+        <% if(user) { %>
+        <a class="nav-link" href="/logout">Log out</a>
+        <% }else{ %>
+        <a class="nav-link" href="/login">Log in</a>
+        <a class="nav-link" href="/signup">Sign up</a>
+        <% } %>
     </nav>
 
     <!-- Login form -->
