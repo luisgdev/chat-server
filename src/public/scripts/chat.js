@@ -6,23 +6,14 @@ let chat_block = document.getElementById('chat-input-block');
 let text = document.getElementById('text-input');
 let button = document.getElementById('send-button');
 let login_block = document.getElementById('login-block');
-let username = document.getElementById('username');
+let username = document.getElementById('usermail').innerHTML; //modified
 let login_btn = document.getElementById('login-button');
 let user_typing = document.getElementById('user-typing');
-
-// User Login, then chat input block shows up
-function login(){
-    chat_block.className = 'd-flex';
-    login_block.className = 'd-none';
-    text.setAttribute += ' autofocus';
-}
-login_btn.addEventListener('click', login);
-username.addEventListener('change', login);
 
 // Send message to 'chatroom'
 function send_msg(){
     socket.emit('chatroom', {
-        username: username.value,
+        username: username,
         message: text.value
     });
     text.value = '';
@@ -38,7 +29,7 @@ socket.on('chatroom', (data) => {
 
 // Listen user keyboard
 text.addEventListener('keypress', () => {
-    socket.emit('user:typing', username.value);
+    socket.emit('user:typing', username);
 });
 
 // Show user is typing
