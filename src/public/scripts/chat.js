@@ -2,12 +2,9 @@ const socket = io();
 
 // DOM Elements
 let chatbox = document.getElementById('chat-box');
-let chat_block = document.getElementById('chat-input-block');
 let text = document.getElementById('text-input');
 let button = document.getElementById('send-button');
-let login_block = document.getElementById('login-block');
-let username = document.getElementById('usermail').innerHTML; //modified
-let login_btn = document.getElementById('login-button');
+let username = document.getElementById('username').innerHTML; //modified
 let user_typing = document.getElementById('user-typing');
 
 // Send message to 'chatroom'
@@ -19,7 +16,7 @@ function send_msg(){
     text.value = '';
 }
 button.addEventListener('click', send_msg);
-text.addEventListener('change', send_msg);
+text.addEventListener('keyup', send_msg);
 
 // Listen messages from 'chatroom'
 socket.on('chatroom', (data) => {
