@@ -16,7 +16,13 @@ function send_msg(){
     text.value = '';
 }
 button.addEventListener('click', send_msg);
-text.addEventListener('keyup', send_msg);
+// This event listen for a 'Enter' key to send_msg
+text.addEventListener('keyup', (event)=>{
+    if(event.keyCode === 13){
+        event.preventDefault();
+        send_msg();
+    }
+});
 
 // Listen messages from 'chatroom'
 socket.on('chatroom', (data) => {
