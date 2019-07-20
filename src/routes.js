@@ -2,32 +2,13 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-// Users database (TEMP)
-const users = [
-  {
-    username: "admin",
-    password: "admin321",
-    status: "offline"
-  },
-  {
-    username: "luisg",
-    password: "luisg123",
-    status: "offline"
-  }
-];
-
 // routes
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Chat server app' });
 });
 
-// Routes below this block will only be shown to noAuth users
-/*router.use((req, res, next) => {
-  isNotAuthenticated(req, res, next);
-  next();
-});*/
-
-router.get('/login', (req, res, next) => {
+// The 2nd parameter will verify if user isn't Auth
+router.get('/login', isNotAuthenticated, (req, res, next) => {
   res.render('login');
 });
 
@@ -37,7 +18,8 @@ router.post('/login', passport.authenticate('local-login', {
   passReqToCallback: true
 }));
 
-router.get('/signup', (req, res, next) => {
+// The 2nd parameter will verify if user isn't Auth
+router.get('/signup', isNotAuthenticated, (req, res, next) => {
   res.render('signup');
 });
 
@@ -58,7 +40,7 @@ router.get('/chat', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
-  res.send('Profile');
+  res.render('profile');
 });
 
 router.get('/logout', (req, res, next) => {
@@ -75,12 +57,12 @@ function isAuthenticated(req, res, next) {
   }
 };
 
-/*function isNotAuthenticated(req, res, next) {
+function isNotAuthenticated(req, res, next) {
   if(!req.isAuthenticated()){
     return next();
   }else{
     res.redirect('/chat');
   }
-};*/
+};
 
 module.exports = router;

@@ -1,0 +1,20 @@
+<%- layout('layouts/layout.ejs') %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 offset-md-1">
+            <div class="card rounded-lg w-auto p-3 bg-light px-5">
+                <h3>User Info from db</h3><hr>
+                <ul>
+                    <li><strong>Username:</strong> <%- user.username %></li>
+                    <li><strong>Email:</strong> <%- user.email %></li>
+                    <li><strong>ID:</strong> <%- user.id %></li>
+                    <li><strong>Password:</strong> <%- user.password %></li>
+                </ul>
+                <div class="mt-3 form-group">
+                    <a href="/chat">Go back</a>
+                </div>
+                <p class="text-danger">(For Development use only)</p>
+            </div>
+        </div>
+    </div>
+</div>
